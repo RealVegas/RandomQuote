@@ -1,6 +1,6 @@
 import requests
 from flask import Flask, render_template
-from googletrans import Translator, constants
+from googletrans import Translator
 
 
 app = Flask(__name__)
