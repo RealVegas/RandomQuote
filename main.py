@@ -10,22 +10,22 @@ translator: Translator = Translator()
 @app.route('/', methods=['GET', 'POST'])
 def get_quote() -> str:
     quote_url: str = 'https://api.quotable.io/random'
-    response: requests = requests.get(url=quote_url, verify=False)
+    response: requests = requests.get(url=quote_url, verify=False)  # Сервер не поддерживает верификацию
 
     if response.status_code == 200:
         quote_data: dict[str: str] = response.json()
         quote_text: str = quote_data.get('content', 'No quote found')
         author: str = quote_data.get('author', 'Unknown')
 
-        trans_text: str = translator.translate(quote_text, dest='ru').text
-        trans_author: str = translator.translate(author, dest='ru').text
+        ru_text: str = translator.translate(quote_text, dest='ru').text
+        ru_author: str = translator.translate(author, dest='ru').text
 
     else:
-        trans_text: str = 'Ошибка при извлечении цитаты'
-        trans_author: str = ''
+        ru_text: str = 'Ошибка при извлечении цитаты'
+        ru_author: str = ''
 
-    return render_template('index.html', quote=trans_text, author=trans_author)
+    return render_template('index.html', quote=ru_text, author=ru_author)
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
