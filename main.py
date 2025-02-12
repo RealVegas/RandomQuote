@@ -7,7 +7,7 @@ app: Flask = Flask(__name__)
 translator: Translator = Translator()
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def get_quote() -> str:
     quote_url: str = 'https://api.quotable.io/random'
     response: requests = requests.get(url=quote_url, verify=False)  # Сервер не поддерживает верификацию
